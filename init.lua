@@ -37,6 +37,10 @@ require("config.options")
 
 -- Setup Lazy
 
+-- Setup custom events
+local lazy_events = require("config.lazy_events")
+lazy_events.setup()
+
 require("lazy").setup({
 	spec = {
 		-- { "LazyVim/LazyVim", import = "lazyvim.plugins" },
