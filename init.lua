@@ -40,6 +40,8 @@ require("config.options")
 
 require("lazy").setup({
 	spec = {
+        { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+        { import = "lazyvim.plugins.extras" },
 		{ import = "plugins" },
 	},
 	install = { colorscheme = { "vscode" } },
