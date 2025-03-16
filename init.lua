@@ -42,7 +42,7 @@ require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
 	},
-	install = { colorscheme = { "catppuccin" } },
+	install = { colorscheme = { "vscode" } },
 	change_detection = {
 		notify = false
 	},
@@ -70,7 +70,6 @@ require("lazy").setup({
 require("config.files")
 require("config.mappings")
 require("config.colors")
-require("mason").setup()
 
 -- local pid = vim.fn.getpid()
 
