@@ -71,6 +71,11 @@ require("config.files")
 require("config.mappings")
 require("config.colors")
 
+-- LSP
+require'lspconfig'.omnisharp.setup {
+    cmd = { "dotnet", "D:/LspServers/omnisharp-win-x64/OmniSharp.exe" },
+}
+
 -- local pid = vim.fn.getpid()
 
 -- local omnisharp_bin = "D:/LspServers/omnisharp-win-x64/OmniSharp.exe"
