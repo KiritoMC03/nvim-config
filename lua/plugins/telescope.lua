@@ -11,9 +11,15 @@ return {
 				end,
 			},
 			{ "nvim-telescope/telescope-project.nvim" },
+			{ "nvim-lua/plenary.nvim" },
 			{ "debugloop/telescope-undo.nvim" },
 		},
 		keys = {
+			{
+				"<leader>ff",
+				":Telescope find_files<CR>",
+				desc = "Find Files",
+			},
 			{
 				"<leader>fp",
 				"<cmd>Telescope project display_type=full<cr>",
@@ -30,7 +36,7 @@ return {
 			extensions = {
 				project = {
 					base_dirs = {
-						"~/projects",
+						"D:/",
 					},
 				},
 				undo = {
