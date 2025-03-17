@@ -24,11 +24,6 @@ return {
         },
     },
 
-	-- add folding range to capabilities
-	{
-		"neovim/nvim-lspconfig",
-	},
-
 	-- file explorer
 	{
 		"nvim-neo-tree/neo-tree.nvim",

@@ -70,19 +70,54 @@ return {
   -- lsp servers
   {
     "neovim/nvim-lspconfig",
+    event = "LazyFile",
     dependencies = {
-      {
-        "SmiteshP/nvim-navbuddy",
-        dependencies = {
-          "SmiteshP/nvim-navic",
-          "MunifTanjim/nui.nvim",
-        },
-        opts = { lsp = { auto_attach = true } },
-        keys = {
-          { "<leader>cln", "<cmd>Navbuddy<cr>", desc = "Lsp Navigation" },
-        },
-      },
+        { "williamboman/mason.nvim", config = true },
+        { "williamboman/mason-lspconfig.nvim" },
+        { "hrsh7th/cmp-nvim-lsp" },
     },
+    config = function()
+        local lspconfig = require("lspconfig")
+        local mason = require("mason")
+        local mason_lspconfig = require("mason-lspconfig")
+        local cmp_nvim_lsp = require("cmp_nvim_lsp")
+
+        mason.setup()
+        mason_lspconfig.setup({
+            ensure_installed = {
+                "lua_ls",
+            },
+            automatic_installation = true,
+        })
+
+        local function on_attach(client, bufnr)
+            local opts = { noremap = true, silent = true, buffer = bufnr }
+        end
+
+        local capabilities = cmp_nvim_lsp.default_capabilities()
+
+        mason_lspconfig.setup_handlers({
+            function(server_name)
+                lspconfig[server_name].setup({
+                    on_attach = on_attach,
+                    capabilities = capabilities,
+                })
+            end,
+        })
+    end,
+    --  dependencies = {
+    --  {
+    --    "SmiteshP/nvim-navbuddy",
+    --    dependencies = {
+    --      "SmiteshP/nvim-navic",
+    --      "MunifTanjim/nui.nvim",
+    --    },
+    --    opts = { lsp = { auto_attach = true } },
+    --    keys = {
+    --      { "<leader>cln", "<cmd>Navbuddy<cr>", desc = "Lsp Navigation" },
+    --    },
+    --  },
+    --},
     -- init = function()
     --   local keys = require("lazyvim.plugins.lsp.keymaps").get()
 
