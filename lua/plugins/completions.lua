@@ -8,32 +8,37 @@ return {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
-            "L3MON4D3/LuaSnip",
-            "saadparwaiz1/cmp_luasnip",
+            -- "L3MON4D3/LuaSnip",
+            -- "saadparwaiz1/cmp_luasnip",
         },
 
         opts = function()
             vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
             local cmp = require("cmp")
-            local defaults = require("cmp.config.default")()
+            -- local defaults = require("cmp.config.default")()
             local auto_select = true
+            -- local luasnip = require("luasnip")
+
             return {
                 auto_brackets = {},
                 completion = {
                     completeopt = "menu,menuone,noinsert" .. (auto_select and "" or ",noselect"),
                 },
-                preselect = auto_select and cmp.PreselectMode.Item or cmp.Preselect.None,
+                preselect = cmp.PreselectMode.Item,
                 mapping = cmp.mapping.preset.insert({
                     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                    ["<Tab>"] = cmp.mapping.complete(),
-                    ["<Down>"] = cmp.mapping.select_next_item(), -- Move down
-                    ["<Up>"] = cmp.mapping.select_prev_item(),   -- Move up
+                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+                    ["<Esc>"] = cmp.mapping.abort(),
+                    ["<Down>"] = cmp.mapping.select_next_item(),
+                    ["<Up>"] = cmp.mapping.select_prev_item(),
                 }),
-                sources = {
+                sources = cmp.config.sources({
                     { name = "nvim_lsp" },
-                    { name = "luasnip" },
-                },
+                    -- { name = "luasnip" },
+                    { name = "buffer" },
+                    { name = "path" },
+                }),
             }
         end,
     }
