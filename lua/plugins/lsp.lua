@@ -14,6 +14,42 @@ return {
   {
     "williamboman/mason.nvim",
   },
+  {
+    "williamboman/mason-lspconfig.nvim",
+      opts = {
+        automatic_installation = true,
+        ensure_installed = {
+          --"vtsls",
+          --"eslint",
+          --"html",
+          --"cssls",
+          --"svelte",
+          --"tailwindcss",
+          "lua_ls",
+          --"jsonls",
+          --"taplo",
+          --"yamlls",
+          "omnisharp",
+          --"powershell_es",
+          --"marksman",
+          --"lemminx",
+          --"rust_analyzer",
+        },
+      },
+    },
+    {
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      opts = {
+        ensure_installed = {
+          --"prettier", -- prettier formatter
+          --"rustywind", -- tailwind class sorter
+          --"stylua", -- lua formatter
+          "csharpier", -- c# formatter
+          "netcoredbg", -- c# debugger
+          "xmlformatter", -- xml formatter
+        },
+      },
+    },
 
   {
     "jay-babu/mason-null-ls.nvim",
@@ -60,22 +96,24 @@ return {
     dependencies = {
         { "williamboman/mason.nvim", config = true },
         { "williamboman/mason-lspconfig.nvim" },
+        { "WhoIsSethDaniel/mason-tool-installer.nvim" },
         { "hrsh7th/cmp-nvim-lsp" },
     },
     config = function()
         local lspconfig = require("lspconfig")
         local mason = require("mason")
         local mason_lspconfig = require("mason-lspconfig")
+        local mason_tool_installer = require "mason-tool-installer"
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-        mason.setup()
-        mason_lspconfig.setup({
-            ensure_installed = {
-                "lua_ls",
-                "omnisharp",
-            },
-            automatic_installation = true,
-        })
+        --mason.setup()
+        --mason_lspconfig.setup({
+        --    ensure_installed = {
+        --        "lua_ls",
+        --        "omnisharp",
+        --    },
+        --    automatic_installation = true,
+        --})
 
         local function on_attach(client, bufnr)
             local opts = { noremap = true, silent = true, buffer = bufnr }
@@ -85,12 +123,40 @@ return {
 
         mason_lspconfig.setup_handlers({
             function(server_name)
-                lspconfig[server_name].setup({
-                    on_attach = on_attach,
-                    capabilities = capabilities,
-                })
+                if server_name == "omnisharp" then
+                    lspconfig.omnisharp.setup({
+                        cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+                        on_attach = on_attach,
+                        capabilities = capabilities,
+                        settins = {
+                            ["omnisharp"] = {
+                                enableRoslynAnalyzers = true,
+                                analyzeOpenDocumentsOnly = false,
+                                useModernNet = true,
+                            },
+                        },
+                    })
+                    lspconfig[server_name].setup({
+                        on_attach = on_attach,
+                        capabilities = capabilities,
+                    })
+                else
+                    lspconfig[server_name].setup({
+                        on_attach = on_attach,
+                        capabilities = capabilities,
+                    })
+                end
             end,
         })
+
+        lspconfig.omnisharp.setup {
+            cmd = { "omnisharp" },
+            root_dir = lspconfig.util.root_pattern("*.sln", "*.scproj"),
+            on_attach = function(client, bufnr)
+                local function buf_set_option(...) vim.api.nvim_bug_set_option(bufnr, ...) end
+                buf_set_option("omnisharp", "omnisharp")
+            end
+        }
     end,
   },
 }

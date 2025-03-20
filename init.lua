@@ -77,9 +77,9 @@ require("config.mappings")
 require("config.colors")
 
 -- LSP
-require("lspconfig").omnisharp.setup({
-	cmd = { "dotnet", "D:/LspServers/omnisharp-win-x64/OmniSharp.exe" },
-})
+--require("lspconfig").omnisharp.setup({
+--	cmd = { "dotnet", "D:/LspServers/omnisharp-win-x64/OmniSharp.exe" },
+--})
 
 -- Telescope
 -- To get fzf loaded and working with telescope, you need to call
