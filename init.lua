@@ -4,32 +4,13 @@ vim.loader.enable()
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
 
+-- Load utils
+
+local utils = require("config.utils")
+
 -- Prepare Lazy
 
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-	local out = vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"--branch=stable",
-		lazyrepo,
-		lazypath,
-	})
-	if vim.v.shell_error ~= 0 then
-		vim.api.nvim_echo({
-			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ out, "WarningMsg" },
-			{ "\nPress any key to exit..." },
-		}, true, {})
-		vim.fn.getchar()
-		os.exit(1)
-	end
-end
-
-vim.opt.rtp:prepend(lazypath)
+utils.lazy_bootstrap()
 
 -- Setup options
 
@@ -42,12 +23,7 @@ local lazy_events = require("config.lazy_events")
 lazy_events.setup()
 
 require("lazy").setup({
-	spec = {
-		-- { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-		-- { import = "lazyvim.plugins" },
-		-- { import = "lazyvim.plugins.extras" },
-		{ import = "plugins" },
-	},
+	spec = utils.generate_lazy_import_specs(),
 	install = { colorscheme = { "vscode" } },
 	change_detection = {
 		notify = false,
@@ -72,7 +48,6 @@ require("lazy").setup({
 })
 
 -- Other configs
-require("config.files")
 require("config.mappings")
 require("config.colors")
 
