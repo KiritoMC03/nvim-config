@@ -1,13 +1,14 @@
 return {
     {
         "williamboman/mason.nvim",
+        config = true,
         -- event = "VeryLazy",
-        lazy = true,
+        -- lazy = true,
     },
     {
         "williamboman/mason-lspconfig.nvim",
         -- event = "VeryLazy",
-        lazy = true,
+        -- lazy = true,
         dependencies = {
             "williamboman/mason.nvim"
         },
@@ -17,6 +18,13 @@ return {
                 "lua_ls",
                 "omnisharp",
             },
+        },
+    },
+    {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        dependencies = {
+            "williamboman/mason.nvim",
+            "williamboman/mason-lspconfig.nvim",
         },
     },
 }

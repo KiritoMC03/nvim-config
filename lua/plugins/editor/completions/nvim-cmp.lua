@@ -2,6 +2,7 @@ return {
     -- Setup nvim-cmp
     {
         "hrsh7th/nvim-cmp",
+        enable = false,
         version = false, -- last release is way too old
         event = "InsertEnter",
         dependencies = {
