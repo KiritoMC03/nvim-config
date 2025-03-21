@@ -20,8 +20,8 @@ return {
 
             local ensure_installed = vim.tbl_keys(servers)
             vim.list_extend(ensure_installed, {
-                "csharpier", -- c# formatter
-                "netcoredbg", -- c# debugger
+                -- "csharpier", -- c# formatter
+                -- "netcoredbg", -- c# debugger
                 "prettier", -- prettier formatter
                 "rustywind", -- tailwind class sorter
                 "stylua", -- lua formatter
@@ -41,6 +41,7 @@ return {
                 registries = {
                     "github:mason-org/mason-registry",
                     "github:syndim/mason-registry",
+                    "github:Crashdummyy/mason-registry",
                 },
             }
             mason_tool_installer.setup { ensure_installed = ensure_installed }
@@ -54,6 +55,18 @@ return {
                 },
             }
         end,
+        keys = {
+            -- stylua: ignore start
+            { "[d", function() vim.lsp.diagnostic.goto_prev()end, desc = "lsp goto prev diagnostic" },
+            { "]d", function() vim.lsp.diagnostic.goto_next()end, desc = "lsp goto next diagnostic" },
+            { "gD", "<cmd>Trouble lsp_declarations<cr>", desc = "lsp declaration" },
+            { "gd", "<cmd>Trouble lsp_definitions<cr>", desc = "lsp definition" },
+            { "gi", "<cmd>Trouble lsp_implementations<cr>", desc = "lsp implementation" },
+            { "gk", function() vim.lsp.buf.hover()end, desc = "lsp hover" },
+            { "gr", "<cmd>Trouble lsp_references<cr>", desc = "lsp references" },
+            { "gy", "<cmd>Trouble lsp_type_definitions<cr>", desc = "lsp type definition" },
+            -- stylua: ignore start
+        },
 	},
 }
 
