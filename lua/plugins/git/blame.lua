@@ -7,7 +7,7 @@ return {
             {
                 "<leader>gv",
                 ":BlameToggle window<CR>",
-                desc = "Git visualize dif",
+                desc = "Git visualize changes",
             },
         },
     },
