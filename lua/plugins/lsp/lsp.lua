@@ -22,10 +22,10 @@ return {
             vim.list_extend(ensure_installed, {
                 -- "csharpier", -- c# formatter
                 -- "netcoredbg", -- c# debugger
-                "prettier", -- prettier formatter
-                "rustywind", -- tailwind class sorter
+                -- "prettier", -- prettier formatter
+                -- "rustywind", -- tailwind class sorter
                 "stylua", -- lua formatter
-                "xmlformatter", -- xml formatter
+                -- "xmlformatter", -- xml formatter
             })
 
             mason.setup {
