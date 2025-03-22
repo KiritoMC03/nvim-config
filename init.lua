@@ -1,5 +1,7 @@
 -- Configure startup
 vim.loader.enable()
+vim.g.theme = "vscode"
+vim.g.linetheme = "vscode"
 
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1

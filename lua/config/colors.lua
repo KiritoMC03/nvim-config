@@ -11,4 +11,4 @@ function SetColor(color)
 end
 
 -- SetColor("catppuccin")
-SetColor("vscode")
+SetColor(vim.g.theme)
