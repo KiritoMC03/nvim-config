@@ -16,6 +16,7 @@ return {
 
             local servers = {
                 lua_ls = {},
+                omnisharp = {},
             }
 
             local ensure_installed = vim.tbl_keys(servers)
@@ -51,6 +52,16 @@ return {
                         local server = servers[server_name] or {}
                         server.capabilities = require("blink.cmp").get_lsp_capabilities(server.capabilities or {})
                         require("lspconfig")[server_name].setup(server)
+                    end,
+
+                    ["omnisharp"] = function()
+                        require("lspconfig").omnisharp.setup{
+                            enable_roslyn_analysers = true,
+				            enable_import_completion = true,
+				            organize_imports_on_format = true,
+				            enable_decompilation_support = true,
+				            filetypes = { 'cs', 'vb', 'csproj', 'sln', 'slnx', 'props', 'csx', 'targets', 'tproj', 'slngen', 'fproj' },
+                        }
                     end,
                 },
             }

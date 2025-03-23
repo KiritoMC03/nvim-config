@@ -1,6 +1,7 @@
 return {
     {
         "seblyng/roslyn.nvim",
+        enabled = false,
         ft = "cs",
         dependencies = {
             "saghen/blink.cmp",
