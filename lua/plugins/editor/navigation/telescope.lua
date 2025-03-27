@@ -5,7 +5,7 @@ return {
 			{ "nvim-telescope/telescope-dap.nvim" },
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
-				build = "make",
+				build = "cd %localappdata%\\nvim-data\\lazy\\telescope-fzf-native.nvim && make && cd -",
 				config = function()
 					require("telescope").load_extension("fzf")
 				end,
@@ -25,6 +25,15 @@ return {
 				"<cmd>Telescope project display_type=full<cr>",
 				desc = "Find Plugin File",
 			},
+            {
+                "<leader>ft",
+                ":Telescope live_grep<CR>",
+                desc = "Find text",
+            },
+            {
+                "<leader>fh",
+                ":Telescope current_buffer_fuzzy_find<CR>",
+            },
 		},
 		opts = {
 			defaults = {

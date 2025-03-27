@@ -3,5 +3,7 @@ return {
     event = "InsertEnter",
 	lazy = true,
     config = true,
-	opts = {} -- this is equalent to setup({}) function
+	opts = {
+        map_cr = false,
+    },
 }

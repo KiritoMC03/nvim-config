@@ -1,6 +1,7 @@
 return {
     {
         "saghen/blink.cmp",
+        enabled = false,
         lazy = false,
         dependencies = { "rafamadriz/friendly-snippets" },
         version = "*",
@@ -29,6 +30,7 @@ return {
             },
             completion = {
                 trigger = {
+                    prefetch_on_insert = true,
                     show_on_keyword = true,
                     show_on_trigger_character = true,
                     show_on_blocked_trigger_characters = { ' ', '\n', '\t', '.' },
@@ -49,9 +51,10 @@ return {
                     enabled = true,
                 },
             },
-            sources = {
-                default = { "lsp", "path", "snippets", "buffer" },
-            },
+            -- sources = {
+                -- default = { "lsp", "path", "snippets", "buffer" },
+                -- omnisharp = { enabled = true, priority = 1000 },
+            -- },
             fuzzy = { implementation = 'prefer_rust_with_warning' },
         },
         opts_extend = { "sources.default" },

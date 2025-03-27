@@ -17,6 +17,7 @@ return {
             local servers = {
                 lua_ls = {},
                 omnisharp = {},
+                csharp_ls = {},
             }
 
             local ensure_installed = vim.tbl_keys(servers)
@@ -50,7 +51,7 @@ return {
                 handlers = {
                     function(server_name)
                         local server = servers[server_name] or {}
-                        server.capabilities = require("blink.cmp").get_lsp_capabilities(server.capabilities or {})
+                        -- server.capabilities = require("blink.cmp").get_lsp_capabilities(server.capabilities or {})
                         require("lspconfig")[server_name].setup(server)
                     end,
 
