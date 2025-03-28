@@ -1,7 +1,7 @@
 return {
     {
         "saghen/blink.cmp",
-        enabled = false,
+        -- enabled = false,
         lazy = false,
         dependencies = { "rafamadriz/friendly-snippets" },
         version = "*",
@@ -33,7 +33,7 @@ return {
                     prefetch_on_insert = true,
                     show_on_keyword = true,
                     show_on_trigger_character = true,
-                    show_on_blocked_trigger_characters = { ' ', '\n', '\t', '.' },
+                    show_on_blocked_trigger_characters = { '\n', '\t', '.' },
                 },
                 accept = {
                     auto_brackets = {
@@ -48,7 +48,7 @@ return {
                         auto_show_delay_ms = 500,
                 },
                 ghost_text = {
-                    enabled = true,
+                    enabled = false,
                 },
             },
             -- sources = {

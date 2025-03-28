@@ -1,7 +1,7 @@
 return {
     {
         "neoclide/coc.nvim",
-        -- enabled = false,
+        enabled = false,
         branch = "master",
         build = "npm ci",
         lazy = false,
