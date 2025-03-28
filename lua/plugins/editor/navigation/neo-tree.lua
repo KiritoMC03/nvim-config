@@ -29,6 +29,16 @@ return {
         },
         keys = {
             {
+                "<leader>nf",
+                ":Neotree left focus<CR>",
+                desc = "Explorer focus",
+            },
+            {
+                "<leader>nt",
+                ":Neotree left toggle<CR>",
+                desc = "Explorer toggle",
+            },
+            {
                 "<leader>fr",
                 ":Neotree reveal<CR>",
                 desc = "Reveal file",

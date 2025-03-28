@@ -28,11 +28,12 @@ return {
             {
                 "<leader>ft",
                 ":Telescope live_grep<CR>",
-                desc = "Find text",
+                desc = "Find text everywhere",
             },
             {
                 "<leader>fh",
                 ":Telescope current_buffer_fuzzy_find<CR>",
+                desc = "Find in file",
             },
 		},
 		opts = {
