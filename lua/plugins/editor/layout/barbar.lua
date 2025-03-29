@@ -39,5 +39,10 @@ return {
 			"<Cmd>BufferPrevious<CR>",
 			key_opts,
 		},
+		{
+			'<A-c>',
+			'<Cmd>BufferClose<CR>',
+			key_opts,
+		},
 	}, generate_gotos(9)),
 }
