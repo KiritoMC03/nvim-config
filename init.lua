@@ -8,11 +8,11 @@ vim.g.linetheme = "vscode"
 
 -- Load utils
 
-local utils = require("config.utils")
+local utils = require("config.utils.root")
 
 -- Prepare Lazy
 
-utils.lazy_bootstrap()
+utils.lazy.lazy_bootstrap()
 
 -- Setup options
 
@@ -25,7 +25,7 @@ local lazy_events = require("config.lazy_events")
 lazy_events.setup()
 
 require("lazy").setup({
-	spec = utils.generate_lazy_import_specs(),
+	spec = utils.lazy.generate_lazy_import_specs(),
 	install = { colorscheme = { "vscode" } },
 	change_detection = {
 		notify = false,
@@ -52,22 +52,22 @@ require("lazy").setup({
 -- Other configs
 require("config.mappings")
 require("config.colors")
-
--- LSP
---require("lspconfig").omnisharp.setup({
---	cmd = { "dotnet", "D:/LspServers/omnisharp-win-x64/OmniSharp.exe" },
---})
-
--- Telescope
--- To get fzf loaded and working with telescope, you need to call
--- load_extension, somewhere after setup function:
 require("telescope").load_extension("fzf")
 
--- local pid = vim.fn.getpid()
+function open_config_window()
+	---@param config { system_theme: boolean, prefer_dark: boolean, relative_number: boolean }
+	utils.config_win.open_config_window(function(config)
+		if config.system_theme then
+			vim.cmd("silent! Lazy reload auto-dark-mode.nvim")
+			require("auto-dark-mode").setup()
+		else
+			if config.prefer_dark then
+				vim.api.nvim_set_option_value("background", "dark", {})
+			else
+				vim.api.nvim_set_option_value("background", "light", {})
+			end
+		end
+	end)
+end
 
--- local omnisharp_bin = "D:/LspServers/omnisharp-win-x64/OmniSharp.exe"
-
--- require'lspconfig'.omnisharp.setup{
---  cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) }
---   -- Additional configuration can be added here
--- }
+vim.api.nvim_create_user_command("ConfigUI", open_config_window, {})

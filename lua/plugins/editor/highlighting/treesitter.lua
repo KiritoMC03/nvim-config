@@ -8,7 +8,7 @@ return {
             "VeryLazy",
         },
         dependencies = {
-            "nvim-treesitter-refactor",
+            "nvim-treesitter/nvim-treesitter-refactor",
         },
         lazy = vim.fn.argc(-1) == 0,
         init = function (plugin)
@@ -56,7 +56,6 @@ return {
             },
         },
         config = function (_, opts)
-            print("ts lets go")
             require("nvim-treesitter.configs").setup(opts)
         end
     },
