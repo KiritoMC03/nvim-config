@@ -15,6 +15,16 @@ local options = {
 		key = "relative_number",
 		default = true,
 	},
+	{
+		label = "Use system clipboard",
+		key = "use_sys_clipboard",
+		default = false,
+	},
+	{
+		label = "Use ctrl+S",
+		key = "use_ctrl_s",
+		default = false,
+	},
 }
 
 local config = {}

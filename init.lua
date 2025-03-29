@@ -54,7 +54,13 @@ local mappings = require("config.mappings")
 require("config.colors")
 require("telescope").load_extension("fzf")
 
----@param config { system_theme: boolean, prefer_dark: boolean, relative_number: boolean }
+---@param config {
+---	system_theme: boolean,
+---	prefer_dark: boolean,
+---	relative_number: boolean,
+---	use_sys_clipboard: boolean,
+---	use_ctrl_s: boolean,
+---}
 function handle_config(config)
 	-- theme...
 	if config.system_theme then
@@ -74,6 +80,12 @@ function handle_config(config)
 	elseif not config.relative_number and not vim.opt.number:get() then
 		mappings.switch_lines()
 	end
+
+	-- clipboard
+	mappings.switch_yank_sys(config.use_sys_clipboard)
+
+	-- File ops
+	mappings.switch_ctrl_s(config.use_ctrl_s)
 end
 
 handle_config(utils.config_win.get_saved())
