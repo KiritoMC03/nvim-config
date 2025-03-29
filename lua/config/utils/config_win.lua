@@ -51,6 +51,12 @@ end
 
 -----
 
+function M.get_saved()
+	return vim.tbl_deep_extend("force", config, storage.load_cfg_file(path))
+end
+
+-----
+
 function M.open_config_window(on_submit)
 	config = vim.tbl_deep_extend("force", config, storage.load_cfg_file(path))
 
