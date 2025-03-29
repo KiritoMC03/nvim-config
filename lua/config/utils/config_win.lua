@@ -82,22 +82,17 @@ function M.open_config_window(on_submit)
 
 	render_options()
 
-	-- Map keys inside buffer
-	vim.keymap.set("n", "j", function()
-		current_line = math.min(current_line + 1, #options)
-		vim.api.nvim_win_set_cursor(win, { current_line, 0 })
-	end, { buffer = buf })
-
-	vim.keymap.set("n", "k", function()
+	local up = function()
 		current_line = math.max(current_line - 1, 1)
 		vim.api.nvim_win_set_cursor(win, { current_line, 0 })
-	end, { buffer = buf })
+	end
 
-	vim.keymap.set("n", "<CR>", function()
-		toggle_current_option()
-	end, { buffer = buf })
+	local down = function()
+		current_line = math.min(current_line + 1, #options)
+		vim.api.nvim_win_set_cursor(win, { current_line, 0 })
+	end
 
-	vim.keymap.set("n", "q", function()
+	local quit = function()
 		vim.api.nvim_win_close(win, true)
 		storage.save_cfg_file(config, path)
 		if on_submit then
@@ -105,7 +100,17 @@ function M.open_config_window(on_submit)
 		else
 			print("There is no config handler" .. vim.inspect(config))
 		end
-	end, { buffer = buf })
+	end
+
+	-- Map keys inside buffer
+	vim.keymap.set("n", "j", down, { buffer = buf })
+	vim.keymap.set("n", "<Down>", down, { buffer = buf })
+
+	vim.keymap.set("n", "k", up, { buffer = buf })
+	vim.keymap.set("n", "<Up>", up, { buffer = buf })
+
+	vim.keymap.set("n", "<CR>", toggle_current_option, { buffer = buf })
+	vim.keymap.set("n", "q", quit, { buffer = buf })
 end
 
 return M
