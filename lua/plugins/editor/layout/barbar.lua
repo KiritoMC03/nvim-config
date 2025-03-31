@@ -17,7 +17,8 @@ local function generate_gotos(up_to)
 end
 
 return {
-	"romgrk/barbar.nvim",
+	"KiritoMC03/barbar.nvim",
+	branch = 'feat/preview-mode',
 	lazy = false,
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
@@ -27,6 +28,7 @@ return {
 	end,
 	opts = {
 		animation = true,
+		enable_preview = true,
 	},
 	keys = vim.list_extend({
 		{
