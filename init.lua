@@ -52,6 +52,7 @@ require("lazy").setup({
 -- Other configs
 local mappings = require("config.mappings")
 require("config.colors")
+require("config.autocmd")
 require("telescope").load_extension("fzf")
 
 ---@param config {
@@ -60,9 +61,11 @@ require("telescope").load_extension("fzf")
 ---	relative_number: boolean,
 ---	use_sys_clipboard: boolean,
 ---	use_ctrl_s: boolean,
+---	inlay_hints: boolean,
 ---}
 function handle_config(config)
-	-- theme...
+	vim.g.config_win = config
+	-- theme
 	if config.system_theme then
 		vim.cmd("silent! Lazy reload auto-dark-mode.nvim")
 		require("auto-dark-mode").setup()
@@ -86,6 +89,9 @@ function handle_config(config)
 
 	-- File ops
 	mappings.switch_ctrl_s(config.use_ctrl_s)
+
+	-- Inlay hints
+	utils.hints.toggle_inlay_hint(config.inlay_hints)
 end
 
 handle_config(utils.config_win.get_saved())

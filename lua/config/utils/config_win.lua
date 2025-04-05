@@ -25,6 +25,11 @@ local options = {
 		key = "use_ctrl_s",
 		default = false,
 	},
+	{
+		label = "Show inlay hints",
+		key = "inlay_hints",
+		default = true,
+	},
 }
 
 local config = {}

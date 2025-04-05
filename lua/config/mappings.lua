@@ -39,4 +39,18 @@ function M.switch_ctrl_s(enabled)
 	end
 end
 
+--------
+
+local map_go_line = function(keys, label, motion)
+	vim.keymap.set("n", "<leader>j" .. keys, function()
+		local n = tonumber(vim.fn.input(label))
+		if n then
+			vim.cmd("normal! " .. n .. motion)
+		end
+	end, { desc = label, })
+end
+
+map_go_line('j', 'Jump down by: ', 'j')
+map_go_line('k', 'Jump up by: ', 'k')
+
 return M

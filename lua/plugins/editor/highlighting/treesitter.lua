@@ -47,12 +47,13 @@ return {
                     clear_on_cursor_move = true,
                 },
 
-                smart_rename = {
-                    enable = true,
-                    keymaps = {
-                        smart_rename = "rr",
-                    },
-                },
+				-- rename with coc.nvim is preffered way now
+                -- smart_rename = {
+                --     enable = false,
+                --     keymaps = {
+                --         smart_rename = "rr",
+                --     },
+                -- },
             },
         },
         config = function (_, opts)

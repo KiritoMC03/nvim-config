@@ -7,7 +7,9 @@ return {
             "mfussenegger/nvim-dap",
         },
         opts = {
-            ensure_installed = {},
+            ensure_installed = {
+				"coreclr",
+			},
             automatic_installation = true,
         },
         config = true,

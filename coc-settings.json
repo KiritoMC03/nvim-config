@@ -4,6 +4,18 @@
             "command": "csharp-ls",
             "filetypes": ["cs"],
             "rootPatterns": ["*.csproj", ".vim/", ".git/", ".hg/"]
-        }
-    }
+        },
+    },
+
+	"codeLens": {
+		"enable": true,
+		"display": true
+	},
+
+	"inlayHint": {
+		"enable": true,
+		"enableParameter": true,
+		"display": true,
+		"refreshOnInsertMode": true
+	}
 }
