@@ -54,17 +54,11 @@ local mappings = require("config.mappings")
 require("config.colors")
 require("config.autocmd")
 require("telescope").load_extension("fzf")
-config_win = require('config.config_win')
+local config_win = require('config.config_win')
 
----@param config {
----	system_theme: boolean,
----	prefer_dark: boolean,
----	relative_number: boolean,
----	use_sys_clipboard: boolean,
----	use_ctrl_s: boolean,
----	inlay_hints: boolean,
----}
-function handle_config(config)
+--- @module 'config.config_win'
+--- @param config Config
+local function handle_config(config)
 	vim.g.config_win = config
 	-- theme
 	if config.system_theme then
@@ -79,9 +73,9 @@ function handle_config(config)
 	end
 
 	-- lines...
-	if config.relative_number and not vim.opt.relativenumber:get() then
+	if config.relative_number and not vim.wo.relativenumber then
 		mappings.switch_lines()
-	elseif not config.relative_number and not vim.opt.number:get() then
+	elseif not config.relative_number and not vim.wo.number then
 		mappings.switch_lines()
 	end
 

@@ -6,8 +6,8 @@ return {
         dependencies = {
             "saghen/blink.cmp",
         },
-        ---@module 'roslyn.config'
-        ---@type RoslynNvimConfig
+        -- -@module 'roslyn.config'
+        -- -@type RoslynNvimConfig
         opts = {
             config = {
                 -- capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities()),

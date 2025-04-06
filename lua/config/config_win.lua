@@ -8,6 +8,14 @@
 --- @field key string
 --- @field default boolean
 
+
+--- @class Config
+--- @field system_theme boolean
+---	@field prefer_dark boolean,
+---	@field relative_number boolean,
+---	@field use_sys_clipboard boolean,
+---	@field use_ctrl_s boolean,
+---	@field inlay_hints boolean,
 local M = {}
 
 --- @type PrefsScope
@@ -69,6 +77,11 @@ local hints = {
 			key = "inlay_hints",
 			default = true,
 		},
+		{
+			label = "Show diagnostics on hover",
+			key = "show_diag_on_hover",
+			default = true,
+		},
 	},
 }
 
@@ -90,9 +103,7 @@ end
 local storage = require("config.utils.storage")
 local Layout = require("nui.layout")
 local Popup = require("nui.popup")
-local Text = require("nui.text")
 local Line = require("nui.line")
-local Split = require("nui.split")
 local Event = require("nui.utils.autocmd").event
 local path = "/user_config.json"
 local prefs_popup_offser = 1

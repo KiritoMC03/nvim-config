@@ -1,4 +1,7 @@
 {
+	"diagnostic": {
+		"enable": false
+	},
     "languageserver": {
         "csharp-ls": {
             "command": "csharp-ls",

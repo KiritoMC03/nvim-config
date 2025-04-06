@@ -8,4 +8,14 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
 	end,
 })
 
+vim.api.nvim_create_autocmd({ "CursorHold" }, {
+	callback = function ()
+		vim.diagnostic.open_float({
+			focusable = false,
+			border = "rounded",
+			prefix = "🔍 ",
+		})
+	end
+})
+
 return autocmd
