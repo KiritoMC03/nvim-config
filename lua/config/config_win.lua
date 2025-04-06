@@ -15,7 +15,10 @@
 ---	@field relative_number boolean,
 ---	@field use_sys_clipboard boolean,
 ---	@field use_ctrl_s boolean,
+---	@field use_ctrl_z boolean,
 ---	@field inlay_hints boolean,
+---	@field show_diag_on_hover boolean,
+---	@field show_undo_stack boolean,
 local M = {}
 
 --- @type PrefsScope
@@ -51,6 +54,11 @@ local system = {
 			key = "use_ctrl_s",
 			default = false,
 		},
+		{
+			label = "Use ctrl+Z",
+			key = "use_ctrl_z",
+			default = false,
+		},
 	},
 }
 
@@ -80,6 +88,11 @@ local hints = {
 		{
 			label = "Show diagnostics on hover",
 			key = "show_diag_on_hover",
+			default = true,
+		},
+		{
+			label = "Show undo stack",
+			key = "show_undo_stack",
 			default = true,
 		},
 	},

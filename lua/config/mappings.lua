@@ -2,17 +2,19 @@ local M = {}
 
 vim.keymap.set("n", "<leader>q", ":q<CR>")
 vim.keymap.set("n", "<S-f>", "*", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-A-s>", ":ConfigUI<CR>")
 
 --------
 
 function M.switch_lines()
-	vim.opt.relativenumber = not vim.opt.relativenumber:get()
-	vim.opt.number = not vim.opt.number:get()
+	vim.opt.relativenumber = not vim.wo.relativenumber:get()
+	vim.opt.number = not vim.wo.number:get()
 end
 vim.keymap.set("n", "<leader>dl", M.switch_lines, { desc = "Switch lines mode" })
 
 --------
 
+---@param use_sys_clipboard boolean
 function M.switch_yank_sys(use_sys_clipboard)
 	local prefix = {}
 	if use_sys_clipboard then
@@ -27,6 +29,51 @@ function M.switch_yank_sys(use_sys_clipboard)
 	vim.keymap.set("x", "Y", prefix .. "Y")
 end
 
+--------
+
+---@param enabled boolean
+function M.switch_ctrl_z(enabled)
+	local modes = { "n", "i", "v" }
+
+	for _, mode in ipairs(modes) do
+		if enabled then
+			vim.keymap.set(
+				mode,
+				"<C-z>",
+				mode == "i" and "<C-o>u" or "" .. "u",
+				{ noremap = true, silent = true, desc = "Undo" }
+			)
+		else
+			pcall(vim.keymap.del, mode, "<C-z>")
+		end
+	end
+end
+
+--------
+
+---@param enabled boolean
+function M.switch_undo_stack(enabled)
+	local modes = { "n" }
+
+	for _, mode in ipairs(modes) do
+		if enabled then
+			vim.keymap.set(
+				mode,
+				"<leader>u",
+				function ()
+					require("config.utils.root").popups.show_undo_popup(vim.api.nvim_get_current_buf())
+				end,
+				{ desc = "Show undo stack" }
+			)
+		else
+			pcall(vim.keymap.del, mode, "<leader>u")
+		end
+	end
+end
+
+--------
+
+---@param enabled boolean
 function M.switch_ctrl_s(enabled)
 	local modes = { "n", "i", "v" }
 
@@ -47,10 +94,12 @@ local map_go_line = function(keys, label, motion)
 		if n then
 			vim.cmd("normal! " .. n .. motion)
 		end
-	end, { desc = label, })
+	end, { desc = label })
 end
 
-map_go_line('j', 'Jump down by: ', 'j')
-map_go_line('k', 'Jump up by: ', 'k')
+map_go_line("j", "Jump down by: ", "j")
+map_go_line("k", "Jump up by: ", "k")
+
+--------
 
 return M

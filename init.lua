@@ -84,6 +84,8 @@ local function handle_config(config)
 
 	-- File ops
 	mappings.switch_ctrl_s(config.use_ctrl_s)
+	mappings.switch_ctrl_z(config.use_ctrl_z)
+	mappings.switch_undo_stack(config.show_undo_stack)
 
 	-- Inlay hints
 	utils.hints.toggle_inlay_hint(config.inlay_hints)
