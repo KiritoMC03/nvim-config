@@ -54,6 +54,7 @@ local mappings = require("config.mappings")
 require("config.colors")
 require("config.autocmd")
 require("telescope").load_extension("fzf")
+config_win = require('config.config_win')
 
 ---@param config {
 ---	system_theme: boolean,
@@ -94,7 +95,7 @@ function handle_config(config)
 	utils.hints.toggle_inlay_hint(config.inlay_hints)
 end
 
-handle_config(utils.config_win.get_saved())
+handle_config(config_win.get_saved())
 vim.api.nvim_create_user_command("ConfigUI", function ()
-    utils.config_win.open_config_window(handle_config)
+    config_win.open_config_window(handle_config)
 end, {})

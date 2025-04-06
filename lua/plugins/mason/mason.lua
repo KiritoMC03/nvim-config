@@ -52,6 +52,19 @@ return {
 					require("lspconfig")[server_name].setup(server)
 				end,
 
+				["lua_ls"] = function()
+					local lspconfig = require("lspconfig")
+					lspconfig.lua_ls.setup({
+						settings = {
+							Lua = {
+								diagnostics = {
+									globals = { "vim" },
+								},
+							},
+						},
+					})
+				end,
+
 				["omnisharp"] = function()
 					require("lspconfig").omnisharp.setup({
 						enable_roslyn_analysers = true,

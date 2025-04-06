@@ -8,6 +8,9 @@ return {
 		dependencies = {
 			"windwp/nvim-autopairs",
 		},
+		init = function()
+			vim.g.coc_global_extensions = 'https://github.com/kmz/coc-lua'
+		end,
 		config = function()
 			vim.opt.updatetime = 300
 			vim.opt.signcolumn = "yes"
