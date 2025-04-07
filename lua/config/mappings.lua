@@ -80,8 +80,10 @@ function M.switch_ctrl_s(enabled)
 	for _, mode in ipairs(modes) do
 		if enabled then
 			vim.keymap.set(mode, "<C-s>", "<Cmd>w<CR>", { noremap = true, silent = true, desc = "Save" })
+			vim.keymap.set(mode, "<A-s>", "<Cmd>wa<CR>", { noremap = true, silent = true, desc = "Save all" })
 		else
 			pcall(vim.keymap.del, mode, "<C-s>")
+			pcall(vim.keymap.del, mode, "<A-s>")
 		end
 	end
 end
