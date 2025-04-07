@@ -16,7 +16,7 @@ vim.keymap.set("n", "<leader>dl", M.switch_lines, { desc = "Switch lines mode" }
 
 ---@param use_sys_clipboard boolean
 function M.switch_yank_sys(use_sys_clipboard)
-	local prefix = {}
+	local prefix = ''
 	if use_sys_clipboard then
 		prefix = '"+'
 	else
