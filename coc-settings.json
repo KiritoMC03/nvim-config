@@ -1,24 +1,25 @@
 {
-	"diagnostic": {
-		"enable": false
-	},
     "languageserver": {
         "csharp-ls": {
             "command": "csharp-ls",
             "filetypes": ["cs"],
-            "rootPatterns": ["*.csproj", ".vim/", ".git/", ".hg/"]
-        },
+            "rootPatterns": ["*.csproj", ".vim/", ".git/", ".hg/"],
+       },
     },
 
-	"codeLens": {
-		"enable": true,
-		"display": true
-	},
+	"Lua.diagnostics.globals": ["vim"],
 
-	"inlayHint": {
-		"enable": true,
-		"enableParameter": true,
-		"display": true,
-		"refreshOnInsertMode": true
+	"codeLens.enable": false,
+	"codeLens.display": false,
+
+	"inlayHint.enable": true,
+	"inlayHint.enableParameter": true,
+	"inlayHint.display": true,
+	"inlayHint.refreshOnInsertMode": true,
+
+	"diagnostic.floatConfig": {
+		"border": true,
+		"rounded": true,
+		"title": "Diagnostic",
 	}
 }
