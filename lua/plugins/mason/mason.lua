@@ -1,7 +1,7 @@
 local servers = {
 	lua_ls = {},
 	omnisharp = {},
-	csharp_ls = {},
+	-- csharp_ls = {},
 }
 
 local additional_tools = {
@@ -9,6 +9,7 @@ local additional_tools = {
 	"csharpier",
 	"stylua",
 	"xmlformatter",
+	"fixjson",
 }
 
 local ensure_installed = vim.list_extend(vim.tbl_keys(servers), additional_tools)
@@ -48,6 +49,7 @@ return {
 			handlers = {
 				function(server_name)
 					local server = servers[server_name] or {}
+					server.capabilities = require("blink.cmp").get_lsp_capabilities(server.capabilities or {})
 					-- require("lspconfig")[server_name].setup(require("coq").lsp_ensure_capabilities(server))
 					require("lspconfig")[server_name].setup(server)
 				end,
@@ -58,7 +60,7 @@ return {
 						settings = {
 							Lua = {
 								runtime = {
-									version = 'LuaJIT'
+									version = "LuaJIT",
 								},
 								diagnostics = {
 									globals = { "vim" },
@@ -69,24 +71,25 @@ return {
 				end,
 
 				["omnisharp"] = function()
-					require("lspconfig").omnisharp.setup({
-						enable_roslyn_analysers = true,
-						enable_import_completion = true,
-						organize_imports_on_format = true,
-						enable_decompilation_support = true,
-						filetypes = {
-							"cs",
-							"vb",
-							"csproj",
-							"sln",
-							"slnx",
-							"props",
-							"csx",
-							"targets",
-							"tproj",
-							"slngen",
-							"fproj",
-						},
+					local lspconfig = require("lspconfig")
+					lspconfig.omnisharp.setup({
+						-- enable_roslyn_analysers = true,
+						-- enable_import_completion = true,
+						-- organize_imports_on_format = true,
+						-- enable_decompilation_support = true,
+						-- filetypes = {
+						-- 	"cs",
+						-- 	"vb",
+						-- 	"csproj",
+						-- 	"sln",
+						-- 	"slnx",
+						-- 	"props",
+						-- 	"csx",
+						-- 	"targets",
+						-- 	"tproj",
+						-- 	"slngen",
+						-- 	"fproj",
+						-- },
 					})
 				end,
 			},

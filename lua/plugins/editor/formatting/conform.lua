@@ -10,6 +10,7 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				cs = { "csharpier" },
+				json = { "fixjson" },
 			},
 		},
         keys = {
