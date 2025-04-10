@@ -3,6 +3,7 @@ return {
 		"stevearc/conform.nvim",
 		dependencies = {
 			"mason.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
 		},
 		lazy = "VeryLazy",
 		cmd = "ConformInfo",
@@ -12,14 +13,14 @@ return {
 				cs = { "csharpier" },
 			},
 		},
-        keys = {
-            {
-                '<leader>cf',
-                function ()
-                    require('conform').format()
-                end,
-                desc = 'Format code',
-            },
-        },
+		keys = {
+			{
+				"<leader>cf",
+				function()
+					require("conform").format()
+				end,
+				desc = "Format code",
+			},
+		},
 	},
 }
