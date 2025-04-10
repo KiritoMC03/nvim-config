@@ -6,4 +6,7 @@ vim.opt.autoindent = true
 -- vim.opt.rnu = true
 vim.opt.relativenumber = true
 
+vim.opt.updatetime = 300
+vim.opt.signcolumn = "yes"
+
 vim.g.mapleader = " "

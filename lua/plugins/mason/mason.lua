@@ -14,6 +14,18 @@ local additional_tools = {
 
 local ensure_installed = vim.list_extend(vim.tbl_keys(servers), additional_tools)
 
+---@param capabilities table | nil
+---@return table
+local function merge_lsp_capabilities(capabilities)
+	capabilities = capabilities or {}
+	local blink_there_is, blink = pcall(require, "blink.cmp")
+	if blink_there_is then
+		capabilities = blink.get_lsp_capabilities(capabilities)
+	end
+
+	return capabilities
+end
+
 return {
 	{
 		"williamboman/mason.nvim",
@@ -44,19 +56,21 @@ return {
 		-- lazy = true,
 		dependencies = {
 			"williamboman/mason.nvim",
+			"neovim/nvim-lspconfig",
+			"saghen/blink.cmp",
 		},
 		opts = {
 			handlers = {
 				function(server_name)
 					local server = servers[server_name] or {}
-					server.capabilities = require("blink.cmp").get_lsp_capabilities(server.capabilities or {})
-					-- require("lspconfig")[server_name].setup(require("coq").lsp_ensure_capabilities(server))
+					server.capabilities = merge_lsp_capabilities(server.capabilities)
 					require("lspconfig")[server_name].setup(server)
 				end,
 
 				["lua_ls"] = function()
 					local lspconfig = require("lspconfig")
 					lspconfig.lua_ls.setup({
+						capabilities = merge_lsp_capabilities(nil),
 						settings = {
 							Lua = {
 								runtime = {
@@ -73,6 +87,7 @@ return {
 				["omnisharp"] = function()
 					local lspconfig = require("lspconfig")
 					lspconfig.omnisharp.setup({
+						capabilities = merge_lsp_capabilities(nil),
 						-- enable_roslyn_analysers = true,
 						-- enable_import_completion = true,
 						-- organize_imports_on_format = true,
