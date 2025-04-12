@@ -33,10 +33,8 @@ end
 local function get_omnisharp_root_dir(buf_path, bufnr)
 	local startup_dir = vim.fn.getcwd(-1)
 	if vim.fn.filereadable(startup_dir .. ".vimnetproj") then
-		print("a")
 		return startup_dir
 	else
-		print("b")
 		return require("lspconfig").util.root_pattern(buf_path)
 	end
 end

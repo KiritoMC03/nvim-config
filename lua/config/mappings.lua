@@ -7,8 +7,19 @@ vim.keymap.set("n", "<C-A-s>", ":ConfigUI<CR>")
 --------
 
 function M.switch_lines()
-	vim.opt.relativenumber = not vim.wo.relativenumber:get()
-	vim.opt.number = not vim.wo.number:get()
+	local ok_rel, relativenumber = pcall(function()
+		vim.wo.relativenumber:get()
+	end)
+	local ok_num, number = pcall(function()
+		vim.wo.number:get()
+	end)
+
+	if not ok_rel or not ok_num then
+		relativenumber = true
+		number = false
+	end
+	vim.opt.relativenumber = not relativenumber
+	vim.opt.number = not number
 end
 vim.keymap.set("n", "<leader>dl", M.switch_lines, { desc = "Switch lines mode" })
 
@@ -16,7 +27,7 @@ vim.keymap.set("n", "<leader>dl", M.switch_lines, { desc = "Switch lines mode" }
 
 ---@param use_sys_clipboard boolean
 function M.switch_yank_sys(use_sys_clipboard)
-	local prefix = ''
+	local prefix = ""
 	if use_sys_clipboard then
 		prefix = '"+'
 	else
@@ -57,14 +68,9 @@ function M.switch_undo_stack(enabled)
 
 	for _, mode in ipairs(modes) do
 		if enabled then
-			vim.keymap.set(
-				mode,
-				"<leader>u",
-				function ()
-					require("config.utils.root").popups.show_undo_popup(vim.api.nvim_get_current_buf())
-				end,
-				{ desc = "Show undo stack" }
-			)
+			vim.keymap.set(mode, "<leader>u", function()
+				require("config.utils.root").popups.show_undo_popup(vim.api.nvim_get_current_buf())
+			end, { desc = "Show undo stack" })
 		else
 			pcall(vim.keymap.del, mode, "<leader>u")
 		end
