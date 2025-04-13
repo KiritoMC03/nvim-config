@@ -9,7 +9,7 @@ return {
             { "williamboman/mason-lspconfig.nvim" },
             { "WhoIsSethDaniel/mason-tool-installer.nvim" },
 		},
-		keys = require("config.mappings").telescope,
+		keys = require("config.mappings").lsp,
 	},
 }
 
