@@ -146,6 +146,30 @@ M.lsp = {
 	-- stylua: ignore start
 }
 
+local omnisharp_extended_key_opts = {
+	noremap = true,
+	silent = true,
+}
+--- Mappings for omnisharp-extended
+M.omnisharp_extended = {
+	{
+		"<C-b>",
+		function()
+			require("omnisharp_extended").telescope_lsp_definition()
+		end,
+		desc = "Go to definition",
+		omnisharp_extended_key_opts,
+	},
+	{
+		"<C-r>",
+		function()
+			require("omnisharp_extended").telescope_lsp_references()
+		end,
+		desc = "Find references",
+		omnisharp_extended_key_opts,
+	},
+}
+
 M.diffview = {
 	{
 		"<leader>gdf",
