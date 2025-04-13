@@ -11,16 +11,9 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				cs = { "csharpier" },
+				json = { "fixjson" },
 			},
 		},
-		keys = {
-			{
-				"<leader>cf",
-				function()
-					require("conform").format()
-				end,
-				desc = "Format code",
-			},
-		},
+        keys = require("config.mappings").conform,
 	},
 }

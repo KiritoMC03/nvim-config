@@ -1,14 +1,40 @@
+local os = require("config.utils.root").os
+
+--- @return table | string | boolean build_command
+local function build()
+	if true then
+		return false
+	else
+		local target = ""
+		local artifact = ""
+		local mv_to = "target/release/blink_cmp_fuzzy"
+		if os.is_win() then
+			target = "x86_64-pc-windows-msvc"
+			artifact = "target/x86_64-pc-windows-msvc/release/blink_cmp_fuzzy.dll"
+			mv_to = mv_to .. ".dll"
+		end
+		print("rustup target add " .. target)
+		print("cargo build --release --target " .. target)
+		print("mv " .. artifact .. " " .. mv_to)
+		return {
+			"rustup target add " .. target,
+			"cargo build --release --target " .. target,
+			"move " .. artifact .. " " .. mv_to,
+		}
+	end
+end
+
 return {
     {
         "saghen/blink.cmp",
-        enabled = false,
+        -- enabled = false,
         lazy = false,
-        dependencies = { "rafamadriz/friendly-snippets" },
+        -- dependencies = { "rafamadriz/friendly-snippets" },
         version = "*",
-        build = "cargo build --release",
+        build = build(),
 
-        -- -@module 'blink.cmp'
-        -- -@type blink.cmp.Config
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
         opts = {
             keymap = {
                 preset = "default",

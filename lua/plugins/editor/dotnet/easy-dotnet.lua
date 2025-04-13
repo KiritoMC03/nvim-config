@@ -1,6 +1,7 @@
 return {
     {
         "GustavEikaas/easy-dotnet.nvim",
+		enabled = false,
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope.nvim",
@@ -34,16 +35,6 @@ return {
                 },
             },
         },
-        keys = {
-            -- stylua: ignore start 
-            -- { "<leader>nb", function() require("easy-dotnet").build_default_quickfix() end, desc = "build" },
-            { "<leader>.netB", function() require("easy-dotnet").build_quickfix() end, desc = "build solution" },
-            { "<leader>.netn", function() require("easy-dotnet").run_default() end, desc = "run" },
-            { "<leader>.netR", function() require("easy-dotnet").run_solution() end, desc = "run solution" },
-            { "<leader>.netx", function() require("easy-dotnet").clean() end, desc = "clean solution" },
-            { "<leader>.neta", "<cmd>Dotnet new<cr>", desc = "new item" },
-            { "<leader>.nett", "<cmd>Dotnet testrunner<cr>", desc = "open test runner" },
-            -- stylua: ignore end
-        },
+        keys = require("config.mappings").easy_dotnet,
     },
 }
