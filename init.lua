@@ -1,7 +1,5 @@
 -- Configure startup
 vim.loader.enable()
-vim.g.theme = "vscode"
-vim.g.linetheme = "vscode"
 
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
@@ -51,10 +49,10 @@ require("lazy").setup({
 
 -- Other configs
 local mappings = require("config.mappings")
-require("config.colors")
 require("config.autocmd")
 require("telescope").load_extension("fzf")
 local config_win = require('config.config_win')
+local colors = require("config.colors")
 
 --- @module 'config.config_win'
 --- @param config Config
@@ -72,7 +70,11 @@ local function handle_config(config)
 		end
 	end
 
-	-- lines...
+	vim.g.theme = config.colorscheme
+	vim.g.linetheme = config.colorscheme
+	colors.set_coloscheme(config.colorscheme)
+
+	-- lines
 	if config.relative_number and not vim.wo.relativenumber then
 		mappings.switch_lines()
 	elseif not config.relative_number and not vim.wo.number then
