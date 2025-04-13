@@ -1,3 +1,7 @@
+--- @class MainKey
+--- @field key string
+--- @field label string
+
 local M = {}
 
 vim.keymap.set("n", "<leader>q", ":q<CR>")
@@ -114,12 +118,12 @@ M.telescope = {
 	{
 		"<leader>ff",
 		":Telescope find_files<CR>",
-		desc = "Find Files",
+		desc = "Find files",
 	},
 	{
 		"<leader>fp",
 		"<cmd>Telescope project display_type=full<cr>",
-		desc = "Find Plugin File",
+		desc = "Find project",
 	},
 	{
 		"<leader>ft",
@@ -346,6 +350,26 @@ M.trouble = {
 		desc = "Quickfix List (Trouble)",
 	},
 }
+
+--------
+
+
+--- @type MainKey[]
+local main_keys_list = {
+	{
+		key = "<leader>ff",
+		label = "󰈞 Find file",
+	},
+	{
+		key = "<leader>ft",
+		label = "󰊄 Find text",
+	},
+	{
+		key = "<leader>fp",
+		label = " Find project",
+	},
+}
+M.main_keys_list = main_keys_list
 
 --------
 
