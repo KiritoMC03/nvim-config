@@ -14,28 +14,6 @@ return {
 			{ "nvim-lua/plenary.nvim" },
 			{ "debugloop/telescope-undo.nvim" },
 		},
-		keys = {
-			{
-				"<leader>ff",
-				":Telescope find_files<CR>",
-				desc = "Find Files",
-			},
-			{
-				"<leader>fp",
-				"<cmd>Telescope project display_type=full<cr>",
-				desc = "Find Plugin File",
-			},
-            {
-                "<leader>ft",
-                ":Telescope live_grep<CR>",
-                desc = "Find text everywhere",
-            },
-            {
-                "<leader>fh",
-                ":Telescope current_buffer_fuzzy_find<CR>",
-                desc = "Find in file",
-            },
-		},
 		opts = {
 			defaults = {
 				layout_strategy = "horizontal",
@@ -66,5 +44,6 @@ return {
 			telescope.load_extension("project")
 			telescope.load_extension("undo")
 		end,
+		keys = require("config.mappings").telescope,
 	},
 }

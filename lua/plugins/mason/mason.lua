@@ -104,16 +104,6 @@ return {
 						cmd = { vim.fn.stdpath("data") .. "/mason/packages/omnisharp/omnisharp" },
 						capabilities = merge_lsp_capabilities(nil),
 						root_dir = get_omnisharp_root_dir,
-						-- enable_roslyn_analysers = true,
-						-- enable_import_completion = true,
-						-- organize_imports_on_format = true,
-						-- enable_decompilation_support = true,
-						-- on_attach = function(client, bufnr)
-						-- 	local function buf_set_option(...)
-						-- 		vim.api.nvim_buf_set_option(bufnr, ...)
-						-- 	end
-						-- 	buf_set_option("omnisharp", "omnisharp")
-						-- end,
 						filetypes = {
 							"cs",
 							"vb",
@@ -126,6 +116,16 @@ return {
 							"tproj",
 							"slngen",
 							"fproj",
+						},
+						settings = {
+							FormattingOptions = {
+								EnableEditorConfigSupport = true,
+								OrganizeImports = nil,
+							},
+							RoslynExtensionsOptions = {
+								EnableAnalyzersSupport = true,
+								EnableImportCompletion = true,
+							},
 						},
 					})
 				end,
