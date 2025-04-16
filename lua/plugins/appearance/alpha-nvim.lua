@@ -1,3 +1,4 @@
+local keys_utils = require("config.utils.keys")
 local header = {
 	[[  /$$$$$$                      /$$             /$$$$$$ /$$            /$$$$$$                               ]],
 	[[ /$$__  $$                    | $$            |_  $$_/| $$           /$$__  $$                              ]],
@@ -17,9 +18,10 @@ local header = {
 --- @param fake_key string | nil
 --- @param force_bind boolean | nil
 local function button(key, txt, fake_key, force_bind)
+	local keys_list = keys_utils.replace_spec_with_icons(fake_key or key)
 	local opts = {
 		position = "center",
-		shortcut = fake_key or key,
+		shortcut = keys_list,
 		cursor = 3,
 		width = 32,
 		align_shortcut = "right",
