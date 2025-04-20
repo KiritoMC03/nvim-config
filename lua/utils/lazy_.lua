@@ -37,7 +37,6 @@ function M.generate_lazy_import_specs()
 			return
 		end
 		for _, stat in ipairs(stats) do
-			-- print(stat.name)
 			if stat.type == "directory" then
 				local new_import_path = path .. "/" .. stat.name
 				table.insert(specs, { import = new_import_path:gsub("/", ".") })
@@ -49,8 +48,6 @@ function M.generate_lazy_import_specs()
 	end
 
 	add_specs_from_dir("plugins")
-	-- print(vim.inspect(specs))
-
 	return specs
 end
 

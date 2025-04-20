@@ -1,4 +1,4 @@
-local keys_utils = require("config.utils.keys")
+local keys_utils = require("utils.keys")
 local header = {
 	[[  /$$$$$$                      /$$             /$$$$$$ /$$            /$$$$$$                               ]],
 	[[ /$$__  $$                    | $$            |_  $$_/| $$           /$$__  $$                              ]],

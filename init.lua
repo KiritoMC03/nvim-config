@@ -6,11 +6,13 @@ vim.loader.enable()
 
 -- Load utils
 
-local utils = require("config.utils.root")
+require("utils.state")
+local utils_lazy = require("utils.lazy_")
+local utils_hints = require("utils.hints")
 
 -- Prepare Lazy
 
-utils.lazy.lazy_bootstrap()
+utils_lazy.lazy_bootstrap()
 
 -- Setup options
 
@@ -23,7 +25,7 @@ local lazy_events = require("config.lazy_events")
 lazy_events.setup()
 
 require("lazy").setup({
-	spec = utils.lazy.generate_lazy_import_specs(),
+	spec = utils_lazy.generate_lazy_import_specs(),
 	install = { colorscheme = { "vscode" } },
 	change_detection = {
 		notify = false,
@@ -90,10 +92,11 @@ local function handle_config(config)
 	mappings.switch_undo_stack(config.show_undo_stack)
 
 	-- Inlay hints
-	utils.hints.toggle_inlay_hint(config.inlay_hints)
+	utils_hints.toggle_inlay_hint(config.inlay_hints)
 end
 
 handle_config(config_win.get_saved())
 vim.api.nvim_create_user_command("ConfigUI", function ()
     config_win.open_config_window(handle_config)
 end, {})
+

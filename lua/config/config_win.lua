@@ -147,13 +147,12 @@ for _, scope in ipairs(scopes_def) do
 	end
 end
 
-local storage = require("config.utils.storage")
+local storage = require("utils.storage")
 local Layout = require("nui.layout")
 local Popup = require("nui.popup")
 ---@class NuiLine: any
 local Line = require("nui.line")
 local Event = require("nui.utils.autocmd").event
-local path = "/user_config.json"
 local prefs_popup_offser = 1
 local tab = "	"
 local ui_win = nil
@@ -352,7 +351,7 @@ function M.open_config_window(on_submit)
 		return
 	end
 
-	M.config = vim.tbl_deep_extend("force", M.default_config, storage.load_cfg_file(path))
+	M.config = vim.tbl_deep_extend("force", M.default_config, storage.load_cfg_file())
 	local r = markup()
 	M.layout = r[1]
 	M.scopes_popup = r[2]

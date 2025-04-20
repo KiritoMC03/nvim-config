@@ -1,20 +1,12 @@
-local M = {}
-
-local function reverseTable(t)
-	local reversedTable = {}
-	local itemCount = #t
-	for k, v in ipairs(t) do
-		reversedTable[itemCount + 1 - k] = v
-	end
-	return reversedTable
-end
+local self = {}
+local fn = require("utils.fn")
 
 ---@param target_bufnr number
-function M.show_undo_popup(target_bufnr)
+function self.show_undo_popup(target_bufnr)
 	local Popup = require("nui.popup")
 	local Line = require("nui.line")
 
-	local undo = vim.fn.undotree()
+	local history = vim.fn.undotree()
 	local popup = Popup({
 		border = {
 			style = "rounded",
@@ -23,7 +15,7 @@ function M.show_undo_popup(target_bufnr)
 		position = "50%",
 		size = {
 			width = 25,
-			height = math.min(10, math.max(1, #undo.entries)),
+			height = math.min(10, math.max(1, #history.entries)),
 		},
 		enter = true,
 		focusable = true,
@@ -36,11 +28,11 @@ function M.show_undo_popup(target_bufnr)
 	popup:mount()
 
 	local lines = {}
-	local entries = reverseTable(undo.entries)
+	local entries = fn.reverseTable(history.entries)
 
-	for i, entry in ipairs(entries or {}) do
+	for _, entry in ipairs(entries or {}) do
 		local line = Line()
-		local mark = (entry.seq == undo.seq_cur) and "👉 " or "   "
+		local mark = (entry.seq == history.seq_cur) and "👉 " or "   "
 		local ts = os.date("%H:%M:%S", entry.time or os.time())
 		line:append(mark .. "[" .. entry.seq .. "]", "Comment")
 		line:append(" at " .. ts, "Normal")
@@ -59,7 +51,7 @@ function M.show_undo_popup(target_bufnr)
 		local line = vim.api.nvim_buf_get_lines(popup.bufnr, line_nr - 1, line_nr, false)[1]
 
 		local target_entry = tonumber(string.match(line, "%[(%d+)%]"))
-		local offset = undo.seq_cur - target_entry
+		local offset = history.seq_cur - target_entry
 
 		vim.api.nvim_set_current_buf(target_bufnr)
 		if offset > 0 then
@@ -75,4 +67,4 @@ function M.show_undo_popup(target_bufnr)
 	end)
 end
 
-return M
+return self

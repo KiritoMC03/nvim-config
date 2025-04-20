@@ -73,7 +73,7 @@ function M.switch_undo_stack(enabled)
 	for _, mode in ipairs(modes) do
 		if enabled then
 			vim.keymap.set(mode, "<leader>u", function()
-				require("config.utils.root").popups.show_undo_popup(vim.api.nvim_get_current_buf())
+				require("utils.popups.undo").show_undo_popup(vim.api.nvim_get_current_buf())
 			end, { desc = "Show undo stack" })
 		else
 			pcall(vim.keymap.del, mode, "<leader>u")
@@ -140,12 +140,19 @@ M.telescope = {
 M.lsp = {
 	{
 		"rr",
-		function ()
+		function()
 			vim.lsp.buf.rename()
 		end,
 		mode = "n",
 		-- silent = true,
 		-- noremap = true,
+	},
+	{
+		"<leader>rf",
+		function()
+			vim.lsp.buf.format()
+		end,
+		mode = "n",
 	},
 }
 
@@ -241,6 +248,13 @@ M.neo_tree = {
 		":Neotree reveal<CR>",
 		desc = "Reveal file",
 	},
+}
+
+M.neo_tree_mappings = {
+	["<C-a>"] = function()
+		_G.user_state.last_ctx_menu_path = require("utils.neo_tree").get_cur_path()
+		require("utils.popups.ctx_menu").show_in_neo_tree()
+	end,
 }
 
 local barbar_key_opts = {
@@ -352,7 +366,6 @@ M.trouble = {
 }
 
 --------
-
 
 --- @type MainKey[]
 local main_keys_list = {

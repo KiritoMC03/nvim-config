@@ -1,15 +1,19 @@
-local M = {}
+--- @class Storage
+--- @field user_config string
+local self = {
+	user_config = "/user_config.json"
+}
 
-function M.save_cfg_file(config)
+function self.save_cfg_file(config)
 	local json = vim.fn.json_encode(config)
-	local path = vim.fn.stdpath("config") .. "/user_config.json"
+	local path = vim.fn.stdpath("config") .. self.user_config
 	vim.fn.writefile({ json }, path)
 end
 
 -----
 
-function M.load_cfg_file()
-	local path = vim.fn.stdpath("config") .. "/user_config.json"
+function self.load_cfg_file()
+	local path = vim.fn.stdpath("config") .. self.user_config
 	if vim.fn.filereadable(path) == 1 then
 		local lines = vim.fn.readfile(path)
 		local ok, decoded = pcall(vim.fn.json_decode, table.concat(lines, "\n"))
@@ -20,4 +24,4 @@ function M.load_cfg_file()
 	return {} -- fallback to empty config
 end
 
-return M
+return self

@@ -1,6 +1,6 @@
 local autocmd = {}
 
-local hints = require("config.utils.root").hints
+local hints = require("utils.hints")
 
 vim.api.nvim_create_autocmd({ "BufReadPost" }, {
 	callback = function()

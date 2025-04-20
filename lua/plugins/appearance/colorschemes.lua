@@ -70,7 +70,7 @@ local themes = {
 }
 
 for _, theme in ipairs(themes) do
-	local storage = require("config.utils.storage")
+	local storage = require("utils.storage")
 	local config = storage.load_cfg_file()
 	if theme.name == "vscode" then
 		theme.cond = true
