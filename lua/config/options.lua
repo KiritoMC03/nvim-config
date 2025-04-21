@@ -10,3 +10,6 @@ vim.opt.updatetime = 300
 vim.opt.signcolumn = "yes"
 
 vim.g.mapleader = " "
+
+vim.o.foldmethod = "marker"
+vim.o.foldmarker = "#region,#endregion"
