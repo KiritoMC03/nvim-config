@@ -4,7 +4,7 @@
 
 --- @type sic.core.modules.Module[]
 local list = {}
-local debug = require("sic.core.debug")
+local debug = require("core.debug")
 
 --- @class sic.core.modules
 local modules = {}

@@ -8,9 +8,9 @@
 local config = {
 	plugins = {
 		load_defaults = true,
+		--- paths relative to ~config/lua/
 		defaults_paths = {
-			vim.fn.stdpath("config") .. "/lua/sic/plugins/",
-			vim.fn.stdpath("config") .. "/lua/plugins/",
+			"plugins",
 		},
 	},
 	lazy = {
